@@ -1,0 +1,15 @@
+FROM adminer
+
+
+LABEL org.label-schema.schema-version="1.0.0-demo" \
+    maintainer="anish2good@yahoo.co.in" \
+    org.label-schema.vcs-description="0cloud.com adminer customized" \
+    org.label-schema.docker.cmd="docker run -p 8089:8080 -e ADMINER_DEFAULT_SERVER=192.168.1.3  anishnath/dockerfile:adminer" \
+    image-size="71.6MB" \
+    ram-usage="13.2MB to 70MB" \
+    cpu-usage="Low"
+
+
+
+
+COPY adminer.php /var/www/html/
