@@ -1,0 +1,6 @@
+[mono-centos7-stable]
+name=mono-centos7-stable
+baseurl=https://download.mono-project.com/repo/centos7-stable/
+enabled=1
+gpgcheck=1
+gpgkey=https://download.mono-project.com/repo/xamarin.gpg
