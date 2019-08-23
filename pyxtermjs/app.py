@@ -115,7 +115,7 @@ def main():
         exit(0)
     print(f"serving on http://127.0.0.1:{args.port}")
     app.config["cmd"] = [args.command] + shlex.split(args.cmd_args)
-    socketio.run(app, host='0.0.0.0',debug=args.debug, port=args.port)
+    socketio.run(app, host='0.0.0.0', debug=args.debug, port=args.port)
 
 
 if __name__ == "__main__":

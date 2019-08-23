@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>0cloud0 Playgrounds for </title>
+  <title>Welcome to 0cloud0.com playground Environment</title>
   <style>
   html {
     font-family: arial;
@@ -11,11 +11,10 @@
 </head>
 <body>
 
-<span style="font-size: 1.4em;">pyxterm.js</span>&nbsp;&nbsp;&nbsp;
+<span style="font-size: 1.4em;">0cloud0.com</span>&nbsp;&nbsp;&nbsp;
 <span style="font-size: small;">status: <span style="font-size: small;" id="status">connecting...</span></span>
 
 <div style="width: 100%; height: calc(100% - 50px);" id="terminal"></div>
-
 
 <!-- xterm -->
 <script src="xterm.js"></script>
@@ -41,7 +40,7 @@
   console.log(`size: ${term.cols} columns, ${term.rows} rows`)
   // term.toggleFullScreen(true)
   term.fit()
-  term.write("Welcome to 0cloud0.com")
+  term.write("Welcome to 0cloud0.com!\n")
   term.on('key', (key, ev) => {
     console.log("pressed key", key)
     console.log("event", ev)

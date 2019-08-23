@@ -10,11 +10,14 @@ LABEL org.label-schema.schema-version="1.0.0-demo" \
     cpu-usage="Low"
 
 RUN echo "**** install Python ****" && \
-    apk add --no-cache python3 && \
+    apk add --no-cache python3 bash && \
     if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
     \
     echo "**** install pip ****" && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --no-cache --upgrade pip setuptools wheel && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    pip install pyxtermjs
+
+COPY . ./usr/lib/python3.7/site-packages/pyxtermjs/
