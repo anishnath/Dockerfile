@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}:${VERSION}
 LABEL org.label-schema.schema-version="1.0.0-demo" \
     maintainer="anish2good@yahoo.co.in" \
     org.label-schema.vcs-description="pyterm enabled" \
-    org.label-schema.docker.cmd="docker exec " \
+    org.label-schema.docker.cmd="docker build -t 0cloud0/playground:pyxtermjs ." \
     image-size="71.6MB" \
     ram-usage="13.2MB to 70MB" \
     cpu-usage="Low"
