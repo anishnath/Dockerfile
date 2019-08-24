@@ -8,3 +8,5 @@ LABEL org.label-schema.schema-version="1.0.0-demo" \
     image-size="71.6MB" \
     ram-usage="13.2MB to 70MB" \
     cpu-usage="Low"
+
+COPY . ./usr/lib/python3.7/site-packages/pyxtermjs/
