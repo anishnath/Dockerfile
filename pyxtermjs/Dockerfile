@@ -18,6 +18,6 @@ RUN echo "**** install Python ****" && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --no-cache --upgrade pip setuptools wheel && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    pip install pyxtermjs
+    pip install pyxtermjs flask_cors
 
 COPY . ./usr/lib/python3.7/site-packages/pyxtermjs/

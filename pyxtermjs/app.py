@@ -2,6 +2,7 @@
 import argparse
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+from flask_cors import CORS
 import pty
 import os
 import subprocess
@@ -15,10 +16,11 @@ import shlex
 __version__ = "0.4.0.1"
 
 app = Flask(__name__, template_folder=".", static_folder=".", static_url_path="")
+cors = CORS(app, resources={r"*": {"origins": "*.0cloud0.com"}})
 app.config["SECRET_KEY"] = "secret!"
 app.config["fd"] = None
 app.config["child_pid"] = None
-socketio = SocketIO(app)
+socketio = SocketIO(app,cors_allowed_origins="*")
 
 
 def set_winsize(fd, row, col, xpix=0, ypix=0):
@@ -93,7 +95,7 @@ def connect():
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "A fully functional terminal in your browser. "
+            "A fully functional terminal in your browsers. "
             "https://github.com/cs01/pyxterm.js"
         ),
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
