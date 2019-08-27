@@ -1,0 +1,152 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Welcome to 0cloud0.com nodejs playground Environment online</title>
+  <style>
+  html {
+    font-family: arial;
+  }
+  </style>
+  <link rel="stylesheet" href="xterm.css" />
+</head>
+<body>
+
+<span style="font-size: 1.4em;">0cloud0.com</span>&nbsp;&nbsp;&nbsp;
+<span style="font-size: small;">status: <span style="font-size: small;" id="status">connecting...</span></span>
+<span style="font-size: small;">Time Left: <span style="font-size: small;" id="time"></span></span>
+
+<div style="width: 100%; height: calc(100% - 50px);" id="terminal"></div>
+
+<!-- xterm -->
+<script src="xterm.js"></script>
+<script src="fit.js"></script>
+<script src="webLinks.js"></script>
+<script src="fullscreen.js"></script>
+<script src="search.js"></script>
+<script src="socket.io.js"></script>
+
+<script>
+  Terminal.applyAddon(fullscreen)
+  Terminal.applyAddon(fit)
+  Terminal.applyAddon(webLinks)
+  Terminal.applyAddon(search)
+  const term = new Terminal({
+        cursorBlink: true,
+        macOptionIsMeta: true,
+        scrollback: true,
+    });
+  term.open(document.getElementById('terminal'));
+  term.fit()
+  term.resize(15, 50)
+  console.log(`size: ${term.cols} columns, ${term.rows} rows`)
+  // term.toggleFullScreen(true)
+  term.fit()
+  term.write("Welcome to 0cloud0.com!\n")
+  term.write("This is nodejs Shell Hit Enter to Continue!\n")
+  term.on('key', (key, ev) => {
+    console.log("pressed key", key)
+    console.log("event", ev)
+    socket.emit("pty-input", {"input": key})
+  });
+
+  const socket = io.connect('/pty');
+  const status = document.getElementById("status")
+  const timeleft = document.getElementById("time")
+
+  socket.on("pty-output", function(data){
+    console.log("new output", data)
+    term.write(data.output)
+  })
+
+  socket.on("connect", () => {
+    fitToscreen()
+    status.innerHTML = '<span style="background-color: lightgreen;">connected</span>'
+    }
+  )
+
+  socket.on("disconnect", () => {
+    status.innerHTML = '<span style="background-color: #ff8383;">disconnected</span>'
+    console.log("socket close closing the terminal")
+  })
+  
+  socket.on('reconnecting', (attemptNumber) => {
+	  
+	  console.log("Reconnecting(MAX Try 10) Atempt Number", attemptNumber)
+     
+	  if (attemptNumber > 10) {
+		  socket.close()
+		}
+	  
+	});
+  
+
+  socket.on('reconnect_attempt', (attemptNumber) => {
+	  console.log("reconnect_attempt(MAX Try 10) Atempt Number", attemptNumber)
+	     
+	  if (attemptNumber > 10) {
+		  socket.close()
+		}
+	});
+
+
+  function fitToscreen(){
+    term.fit()
+    socket.emit("resize", {"cols": term.cols, "rows": term.rows})
+  }
+
+  function debounce(func, wait_ms) {
+    let timeout
+    return function(...args) {
+      const context = this
+      clearTimeout(timeout)
+      timeout = setTimeout(() => func.apply(context, args), wait_ms)
+    }
+  }
+
+  const wait_ms = 50;
+  window.onresize = debounce(fitToscreen, wait_ms)
+  
+  
+  var countDownDate = new Date();
+  countDownDate.setHours( countDownDate.getHours() + 1 );
+  
+  //countDownDate.setMinutes( countDownDate.getMinutes() + 3 );
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+ // timeleft.innerHTML = '<span style="background-color: lightgreen;">connected</span>'
+  
+  // Output the result in an element with id="demo"
+  document.getElementById("time").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("time").innerHTML = "Your Session is EXPIRED";
+    socket.close()
+  }
+}, 1000);
+  
+
+</script>
+
+
+
+
+
+</body>
+</html>
