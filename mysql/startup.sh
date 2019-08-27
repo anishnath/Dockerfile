@@ -45,5 +45,5 @@ EOF
 fi
 
 
-exec /usr/bin/mysqld --user=root 
+nohup /usr/bin/mysqld --user=root  &
 nohup pyxtermjs --command mysql --cmd-args='-u root -D mysql'
