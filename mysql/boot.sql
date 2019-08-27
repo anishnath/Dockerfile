@@ -1,0 +1,7 @@
+USE mysql;
+FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY root WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+UPDATE user SET password=PASSWORD("") WHERE user='root' AND host='localhost';
+CREATE DATABASE IF NOT EXISTS mysql CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL ON mysql.* to 'root'@'%' IDENTIFIED BY 'root';
