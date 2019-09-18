@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}
 LABEL org.label-schema.schema-version="1.0.0-demo" \
     maintainer="anish2good@yahoo.co.in" \
     org.label-schema.vcs-description="rhel8 Base Image-minimal" \
-    org.label-schema.docker.cmd="docker run 0cloud0/playground:python3 " \
+    org.label-schema.docker.cmd="docker run 0cloud0/playground:rhelubi7 " \
     image-size="71.6MB" \
     ram-usage="13.2MB to 70MB" \
     cpu-usage="Low"
