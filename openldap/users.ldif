@@ -1,0 +1,8 @@
+dn: uid=0cloud0,ou=Users,dc=0cloud0,dc=com
+objectclass: inetOrgPerson
+cn: 0cloud0
+sn: dummy
+uid: 0cloud0
+userpassword: passwd
+mail: anish2good@yahoo.co.in
+ou: Users

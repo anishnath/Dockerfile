@@ -1,0 +1,8 @@
+dn: dc=0cloud0,dc=com
+objectClass: dcObject
+objectClass: organization
+o: 0cloud0
+
+dn: ou=Users,dc=0cloud0,dc=com
+objectClass: organizationalUnit
+ou: Users

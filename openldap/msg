@@ -1,0 +1,15 @@
+========START LDAP SERVER AND USER  AND ORG==========
+nohup slapd -d "stats" -h ldap:/// &
+slapadd -l org.ldif
+slapadd -l users.ldif
+=======TEST OPERATION=============
+ldapsearch -x -b "dc=0cloud0,dc=com" "uid=0cloud0"
+
+========LDAP DETAILS===============
+ORGANISATION_NAME "0cloud0.com"
+SUFFIX="dc=0cloud0,dc=com"
+ROOT_USER="admin"
+ROOT_PW="admin"
+USER_UID="0cloud0"
+USER_PWD="passwd"
+ACCESS_CONTROL="access to * by * read"
